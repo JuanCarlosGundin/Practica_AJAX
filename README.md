@@ -34,3 +34,19 @@ php artisan storage:link
 ---------------------------------------------------------
 para consultar la base de datos necesito esta linea en controller
 use Illuminate\Support\Facades\DB;
+
+--------------------------------------------------------------
+Cuando coges un proyecto de laravel ya hecho faltan ficheros, 
+una vez que estas dentro del proyecto tienes que lanzar el comando
+
+composer install
+
+alomejor te pide el fichero .env (crealo vago de mierda)
+
+despues te puede pedir el comando
+
+php artisan key:generate 
+
+//MAIL
+
+php artisan :mail EnviarMensaje
