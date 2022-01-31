@@ -46,6 +46,7 @@ function leerJS() {
                 recarga += '<td>' + respuesta[i].nombre + '</td>'
                 recarga += '<td><img src="storage/' + respuesta[i].foto + '" style="width:15px;"></td>'
                 recarga += '<td><button onclick="borrar('+respuesta[i].id+'); return false;">Eliminar</button></td>'
+                recarga += '<td><button onclick="abrir('+respuesta[i].id+',\''+respuesta[i].nombre+'\'); return false;">Editar</button></td>'
                 recarga += '</tr>';
             }
             tabla.innerHTML = recarga;
@@ -116,3 +117,41 @@ function borrar(id) {
     ajax.send(formData);
 }
 
+
+
+//Modal BOX
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var cerrar = document.getElementById("cerrar");
+
+// When the user clicks the button, open the modal 
+function abrir(id,nombre) {
+  modal.style.display = "block";
+  enter=document.getElementById("Aqui")
+  var contenido=''
+  contenido+='<form>' 
+  contenido+='<p>Nombre<p>'
+  contenido+='<input type="text" Value="'+nombre+'">'
+  contenido+='<p>Foto<p>'
+  contenido+='<input type="file">'
+  contenido+='<input type="hidden" Value="'+id+'"><br/><br/>'
+  contenido+='<input type="submit">'
+  contenido+='</form>'
+  contenido+=''
+  enter.innerHTML = contenido;
+}
+
+// When the user clicks on <span> (x), close the modal
+cerrar.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

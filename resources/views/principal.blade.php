@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>CRUD AJAX</title>
-    <script src="js/ajax.js"></script>
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -22,5 +22,16 @@
     <hr>
     <p id="mensaje"></p>
     <hr>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="cerrar" class="close">&times;</span>
+      <p id="Aqui"></p>
+    </div>
+  
+  </div>
+  
+    <script src="js/ajax.js"></script>
 </body>
 </html>
