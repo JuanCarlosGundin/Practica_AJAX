@@ -31,4 +31,18 @@ class UsuarioController extends Controller
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
     }
+
+    public function editarController(Request $request){
+        try {
+            $path=$request->file('foto')->store('uploads','public');
+            $id=$request->input('id');
+            $nombre=$request->input('nombre');
+            DB::table('tbl_users')
+              ->where('id', $id)
+              ->update(['nombre' => $nombre,'foto' => $path]);
+            return response()->json(array('resultado'=> 'OK'));            
+        } catch (\Throwable $th) {
+            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+        }
+    }
 }

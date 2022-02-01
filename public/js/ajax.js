@@ -19,7 +19,7 @@ function objetoAjax() {
     return xmlhttp;
 }
 
-/* Función implementada con AJAX */
+/* Función implementada con AJAX para mostrar la tabla */
 function leerJS() {
     /* Si hace falta obtenemos el elemento HTML donde introduciremos la recarga (datos o mensajes) */
     /* Usar el objeto FormData para guardar los parámetros que se enviarán:
@@ -87,6 +87,7 @@ function insertarJS() {
     ajax.send(formData);
 }
 
+//funcion de borrar con AJAX
 function borrar(id) {
     /* Si hace falta obtenemos el elemento HTML donde introduciremos la recarga (datos o mensajes) */
     /* Usar el objeto FormData para guardar los parámetros que se enviarán:
@@ -116,8 +117,39 @@ function borrar(id) {
 
     ajax.send(formData);
 }
+//funcion para editar
+function editar() {
+    /* Si hace falta obtenemos el elemento HTML donde introduciremos la recarga (datos o mensajes) */
+    /* Usar el objeto FormData para guardar los parámetros que se enviarán:
+       formData.append('clave', valor);
+       valor = elemento/s que se pasarán como parámetros: token, method, inputs... */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'PUT');
+    formData.append('nombre', document.getElementById('nombreE').value);
+    formData.append('foto', document.getElementById('fotoE').files[0]);
+    formData.append('id', document.getElementById('idE').value);
 
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
 
+    ajax.open("POST", "editar", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            /* Leerá la respuesta que es devuelta por el controlador: */
+            if (respuesta.resultado == 'OK') {
+                document.getElementById('mensaje').innerHTML = "Actualización correcta."
+            } else {
+                document.getElementById('mensaje').innerHTML = "Fallo en la actualización: " + respuesta.resultado;
+            }
+            leerJS();
+            modal.style.display = "none";
+        }
+    }
+
+    ajax.send(formData);
+}
 
 //Modal BOX
 
@@ -132,12 +164,12 @@ function abrir(id,nombre) {
   modal.style.display = "block";
   enter=document.getElementById("Aqui")
   var contenido=''
-  contenido+='<form>' 
+  contenido+='<form onsubmit="editar(); return false;">' 
   contenido+='<p>Nombre<p>'
-  contenido+='<input type="text" Value="'+nombre+'">'
+  contenido+='<input type="text" id="nombreE" Value="'+nombre+'">'
   contenido+='<p>Foto<p>'
-  contenido+='<input type="file">'
-  contenido+='<input type="hidden" Value="'+id+'"><br/><br/>'
+  contenido+='<input type="file" id="fotoE">'
+  contenido+='<input type="hidden" id="idE" Value="'+id+'"><br/><br/>'
   contenido+='<input type="submit">'
   contenido+='</form>'
   contenido+=''
