@@ -18,3 +18,6 @@ Route::post('crear',[UsuarioController::class, 'crearController']);
 //ruta de eliminar
 
 Route::delete('eliminar',[UsuarioController::class, 'eliminarController']);
+
+// ruta para insertar
+Route::put('editar',[UsuarioController::class, 'editarController']);
